@@ -48,7 +48,6 @@ class PengajuanController extends Controller
                 'kode_bank_pusat' => 'required',
                 'kode_bank_cabang' => 'required',
                 'kec_ktp' => 'required',
-                'status_pernikahan' => 'required',
                 'kotakab_ktp' => 'required',
                 'alamat_ktp' => 'required',
                 'kec_dom' => 'required',
@@ -154,7 +153,6 @@ class PengajuanController extends Controller
                             'user_id' => $userId->id,
                             'from_apps' => 'sipde',
                             'status' => 8,
-                            'status_pernikahan' => $request->get('status_pernikahan'),
                             'created_at' => Carbon::now(),
                         ];
 

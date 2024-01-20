@@ -20,7 +20,7 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->group(['prefix' => 'pincetar/pemprof','middleware' => 'PemprovToken'], function () use ($router) {
+$router->group(['prefix' => 'pemprof','middleware' => 'PemprovToken'], function () use ($router) {
     $router->post('store', 'V1\PengajuanController@store');
     $router->post('list-cabang', 'V1\CabangController@listCabang');
     $router->post('list-kotakab', 'V1\KotaController@listKota');
