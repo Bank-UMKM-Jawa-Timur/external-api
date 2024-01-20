@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 class CabangController extends Controller
 {
     public function listCabang(){
+        $data = DB::table('cabang')->select('id', 'cabang')
+        ->orderBy('id', 'asc')
+        ->get();
+        return $data;
         $data = [];
         $message = '';
         $status = '';

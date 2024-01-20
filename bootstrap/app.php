@@ -48,6 +48,7 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+
 /*
 |--------------------------------------------------------------------------
 | Register Config Files
@@ -79,6 +80,14 @@ $app->configure('app');
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
+
+$app->middleware([
+    App\Http\Middleware\PemprovToken::class
+ ]);
+
+$app->routeMiddleware([
+    'PemprovToken' => App\Http\Middleware\PemprovToken::class,
+]);
 
 /*
 |--------------------------------------------------------------------------

@@ -20,11 +20,11 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->group(['prefix' => 'pemprov', 'middleware' => 'PemprovToken'], function () use ($router) {
-    $router->post('/store', 'PengajuanController@store');
-    $router->post('/list-cabang', 'CabangController@listCabang');
-    $router->post('/list-kotakab', 'KotaController@listKota');
-    $router->post('/list-kecamatan', 'KecamatanController@listKecamatan');
-    $router->post('/list-desa', 'DesaController@listDesa');
+$router->group(['prefix' => 'pincetar/pemprof','middleware' => 'PemprovToken'], function () use ($router) {
+    $router->post('store', 'V1\PengajuanController@store');
+    $router->post('list-cabang', 'V1\CabangController@listCabang');
+    $router->post('list-kotakab', 'V1\KotaController@listKota');
+    $router->post('list-kecamatan', 'V1\KecamatanController@listKecamatan');
+    $router->post('list-desa', 'V1\DesaController@listDesa');
 });
 
