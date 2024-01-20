@@ -23,9 +23,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +47,7 @@ $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
 );
+
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,14 @@ $app->configure('app');
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
+
+$app->middleware([
+    App\Http\Middleware\PemprovToken::class
+ ]);
+
+$app->routeMiddleware([
+    'PemprovToken' => App\Http\Middleware\PemprovToken::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
