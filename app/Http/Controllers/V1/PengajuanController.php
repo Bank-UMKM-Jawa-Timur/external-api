@@ -24,15 +24,23 @@ class PengajuanController extends Controller
 
         DB::beginTransaction();
         try {
+            // cek validasi nik berdasarkan pengajuan jika lunas maka bisa
+            $cek = DB::table('dd_loan')->where('kode_pendaftaran',$request->get('kode_pendaftaran'))->first();
+            if ($cek) {
+                $unique = $cek->baki_debet > 0 ? '|unique:pengajuan_dagulir,nik' : '';
+            }else{
+                $unique = "";
+            }
+
             $req = $request->all();
             $validator = Validator::make($req, [
                 'kode_pendaftaran' => 'required|unique:pengajuan_dagulir,kode_pendaftaran',
                 'nama' => 'required',
-                'nik' => 'required|unique:pengajuan_dagulir,nik',
+                'nik' => 'required'.$unique,
                 'email' => 'required|unique:pengajuan_dagulir,email',
                 'tempat_lahir' => 'required',
                 'tanggal_lahir' => 'required',
-                'telp' => 'required|unique:pengajuan_dagulir,telp',
+                'telp' => 'required'.$unique,
                 'jenis_usaha' => 'required',
                 'nominal' => 'required',
                 'tujuan_penggunaan' => 'required',
@@ -40,6 +48,7 @@ class PengajuanController extends Controller
                 'kode_bank_pusat' => 'required',
                 'kode_bank_cabang' => 'required',
                 'kec_ktp' => 'required',
+                'status_pernikahan' => 'required',
                 'kotakab_ktp' => 'required',
                 'alamat_ktp' => 'required',
                 'kec_dom' => 'required',
@@ -145,6 +154,7 @@ class PengajuanController extends Controller
                             'user_id' => $userId->id,
                             'from_apps' => 'sipde',
                             'status' => 8,
+                            'status_pernikahan' => $request->get('status_pernikahan'),
                             'created_at' => Carbon::now(),
                         ];
 
