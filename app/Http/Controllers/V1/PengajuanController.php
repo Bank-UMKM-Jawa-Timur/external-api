@@ -28,17 +28,18 @@ class PengajuanController extends Controller
             $cek = DB::table('dd_loan')->where('kode_pendaftaran',$request->get('kode_pendaftaran'))->first();
             if ($cek) {
                 $unique = $cek->baki_debet > 0 ? '|unique:pengajuan_dagulir,nik' : '';
+                $unique_email = $cek->baki_debet > 0 ? '|unique:pengajuan_dagulir,email' : '';
             }else{
                 $unique = "";
+                $unique_email = "";
             }
             $validate_tipe = $request->get('tipe') != 2 ? 'required' : '';
-
             $req = $request->all();
             $validator = Validator::make($req, [
                 'kode_pendaftaran' => 'required|unique:pengajuan_dagulir,kode_pendaftaran',
                 'nama' => 'required',
                 'nik' => 'required'.$unique,
-                'email' => 'required|unique:pengajuan_dagulir,email',
+                'email' => 'required'.$unique_email,
                 'tempat_lahir' => 'required',
                 'tanggal_lahir' => 'required',
                 'telp' => 'required'.$unique,
