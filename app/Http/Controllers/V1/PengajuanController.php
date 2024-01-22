@@ -31,6 +31,7 @@ class PengajuanController extends Controller
             }else{
                 $unique = "";
             }
+            $validate_tipe = $request->get('tipe') != 2 ? 'required' : '';
 
             $req = $request->all();
             $validator = Validator::make($req, [
@@ -58,7 +59,7 @@ class PengajuanController extends Controller
                 'alamat_usaha' => 'required',
                 'tipe' => 'required',
                 'npwp' => 'required',
-                'jenis_badan_hukum' => 'required',
+                'jenis_badan_hukum' => $validate_tipe,
                 'ket_agunan' => 'required',
                 'tanggal' => 'required',
             ], [
